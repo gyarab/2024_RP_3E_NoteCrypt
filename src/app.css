@@ -1,3 +1,25 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+/* width */
+::-webkit-scrollbar {
+	width: 1rem;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	border-radius: 9999px;
+  border: 2px solid rgb(229, 231, 235);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: rgb(229, 231, 235);
+  border: 2px solid black;
+	border-radius: 9999px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+}
