@@ -1,1 +1,1 @@
-<div class="aspect-square h-full rounded-xl bg-gray-200"></div>
+<div class="aspect-square h-full rounded-xl bg-accent-100"></div>

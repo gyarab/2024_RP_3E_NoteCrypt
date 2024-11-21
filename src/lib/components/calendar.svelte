@@ -1,1 +1,1 @@
-<div class="mt-4 w-full grow rounded-xl bg-gray-200"></div>
+<div class="w-full grow rounded-xl bg-primary-100"></div>

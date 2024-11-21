@@ -1,1 +1,1 @@
-<div class="h-full w-full rounded-xl bg-gray-200"></div>
+<div class="h-full w-full rounded-xl border-background-100 border-2"></div>
