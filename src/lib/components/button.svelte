@@ -1,10 +1,29 @@
 <script lang="ts">
-	let { icon, click, fill = false, color = "" }: { icon: string; click: Function; fill?: boolean; color?: string } = $props();
+	let {
+		icon = '',
+		text = '',
+		click = () => {},
+		css = null,
+		fillIcon = false
+	}: {
+		icon?: string;
+		text?: string;
+		click?: Function;
+		css?: string | null;
+		fillIcon?: boolean;
+	} = $props();
 </script>
 
 <button
-	class="{color ? color : "bg-background-100 text-primary hover:bg-primary-50 "} flex aspect-square h-10 items-center justify-center rounded-full transition-colors hover:cursor-pointer"
+	class="flex items-center justify-center gap-2 {css != null
+		? css
+		: 'rounded-lg border-2 border-background-100 bg-background-50 px-2 py-1 font-semibold text-text hover:bg-background-100'}"
 	onclick={() => click()}
-	><span class={fill ? 'material-symbols-outlined fill' : 'material-symbols-outlined'}>{icon}</span
-	></button
 >
+	{#if icon}
+		<span class="material-symbols-outlined {fillIcon ? 'fill' : ''}">{icon}</span>
+	{/if}
+	{#if text}
+		<h3>{text}</h3>
+	{/if}
+</button>
