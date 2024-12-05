@@ -12,7 +12,8 @@
 <svelte:window bind:innerWidth />
 
 {#if innerWidth >= 1024}
-	<div class="">pc layout</div>
+	<Navbar />
+  <h1>PC Layout</h1>
 {:else}
 	<Navbar />
 	<CreateButton />
@@ -30,8 +31,8 @@
 		class="mx-4 mb-8 flex gap-4 overflow-x-scroll rounded-lg bg-background-50 p-4 transition-colors"
 	>
 		{#each Array.from({ length: 10 }) as _}
-      <Recent />
+			<Recent />
 		{/each}
 	</div>
-  <div class="h-screen"></div>
+	<div class="h-screen"></div>
 {/if}

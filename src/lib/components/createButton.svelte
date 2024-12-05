@@ -3,6 +3,10 @@
 </script>
 
 <Button
-	icon="edit"
-	css="fixed transition-colors p-4 hover:bg-secondary-200 font-semibold text-lg bottom-8 right-8 z-10 bg-secondary-100 border-2 text-secondary border-secondary-200 rounded-full"
-/>
+  colorScheme="secondary"
+  preset="fill"
+  disableDefaults={true}
+  additionalStyle="rounded-full fixed p-4 bottom-8 right-8 flex items-center justify-center transition-colors"
+>
+  <span class="material-symbols-outlined">edit</span>
+</Button>

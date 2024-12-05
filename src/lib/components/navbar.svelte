@@ -17,11 +17,15 @@
 <nav
 	class="fixed left-0 top-0 z-50 flex h-16 w-full items-center justify-between border-b-2 border-background-50 bg-background px-4 text-text-800 transition-all"
 >
-	<div class="flex gap-2">
-		<Button icon="menu" css="" click={toggleMenu} />
+	<div class="flex gap-2 items-center">
+		<Button click={toggleMenu} preset="borderless" colorScheme="text800">
+			<span class="material-symbols-outlined">menu</span>
+		</Button>
 		<h2 class="text-lg font-semibold">NoteCrypt</h2>
 	</div>
-	<Button icon="dark_mode" css="" fillIcon={darkMode} click={switchTheme} />
+	<Button click={switchTheme} preset="borderless" colorScheme="text800">
+    <span class="material-symbols-outlined">dark_mode</span>
+  </Button>
 </nav>
 <div class="h-16 w-full"></div>
 
