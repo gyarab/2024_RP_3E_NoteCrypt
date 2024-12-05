@@ -1,38 +1,25 @@
-# sv
+# NoteCrypt
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+NoteCrypt je aplikace pro ukládání a správu poznámek s využitím uživatelských účtů. 
 
-## Creating a project
+## Technologie
 
-If you're seeing this, you've probably already done this step. Congrats!
+Tento projekt využívá následující technologie:
 
-```bash
-# create a new project in the current directory
-npx sv create
+- **[SvelteKit](https://kit.svelte.dev/):** Framework pro tvorbu webových aplikací.
+- **[Prisma](https://www.prisma.io/):** ORM pro připojení a správu databáze.
+- **[TypeScript](https://www.typescriptlang.org/):** 
+- **[Tailwind CSS](https://tailwindcss.com/):** Utility-first CSS framework pro stylování aplikace.
+- **HTML:** Pro základní strukturu aplikace.
 
-# create a new project in my-app
-npx sv create my-app
-```
+---
 
-## Developing
+## Funkcionality
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+- Šifrované ukládání poznámek.
+- Uspořádání poznámek pomocí štítků.
+- Rychlé vyhledávání a filtrování poznámek.
+- Responzivní design.
 
-```bash
-npm run dev
+---
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
