@@ -1,5 +1,6 @@
 <script>
-		let search = '';
+	import Button from './button.svelte';
+	let search = '';
 </script>
 
 <form onsubmit={() => alert(search)}>
