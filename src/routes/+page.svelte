@@ -18,7 +18,7 @@
 	<Navbar />
 	<CreateButton />
 	<Searchbar />
-	<SectionTitle title="Pinned" icon="keep" />
+	<SectionTitle title="Test" icon="keep" />
 	<div
 		class="mx-4 mb-8 flex gap-4 overflow-x-scroll rounded-lg bg-background-50 p-4 transition-colors"
 	>
