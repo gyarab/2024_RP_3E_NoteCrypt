@@ -1,8 +1,10 @@
-<script>
+<script lang="ts">
 	import Button from './button.svelte';
 	import Sidebar from './sidebar.svelte';
 	let darkMode = $state(false);
 	let menuOpen = $state(false);
+
+	let { title = 'NoteCrypt' }: { title?: string } = $props()
 
 	function switchTheme() {
 		darkMode = !darkMode;
@@ -21,7 +23,7 @@
 		<Button click={toggleMenu} preset="borderless" colorScheme="text800">
 			<span class="material-symbols-outlined">menu</span>
 		</Button>
-		<h2 class="text-lg font-semibold">NoteCrypt</h2>
+		<h2 class="text-lg font-semibold">{title}</h2>
 	</div>
 	<Button click={switchTheme} preset="borderless" colorScheme="text800">
     <span class="material-symbols-outlined">dark_mode</span>
