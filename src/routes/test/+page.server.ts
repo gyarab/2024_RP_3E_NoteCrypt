@@ -9,7 +9,7 @@ export const load: PageServerLoad = async (event) => {
 export const actions: Actions = {
   default: async (event) => {
     if (!event.locals.session) {
-      return fail(401);
+      return fail(400);
     }
 
     await lucia.invalidateSession(event.locals.session.id);
