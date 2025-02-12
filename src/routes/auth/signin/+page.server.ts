@@ -16,12 +16,12 @@ export const actions: Actions = {
       }
     });
 
-    if (!user) return fail(401);
+    if (!user) return fail(400, { reason: 'nonexistent' });
 
     const passwordMatch = await compare(password as string, user.passwordHash);
 
     if (!passwordMatch) {
-      return fail(401);
+      return fail(400, { reason: 'incorrectPassword' });
     }
 
     const session = await lucia.createSession(user.id, {});

@@ -8,7 +8,7 @@ export const handle: Handle = async ({ event, resolve }) => {
     event.locals.user = null;
     event.locals.session = null;
 
-    if (!event.url.pathname.startsWith('/auth') && !(event.url.pathname == '/')) redirect(302, '/auth/login');
+    if (!event.url.pathname.startsWith('/auth') && !(event.url.pathname == '/')) redirect(302, '/auth/signin');
 
     return resolve(event);
   }
