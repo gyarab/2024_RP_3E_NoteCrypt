@@ -70,7 +70,7 @@
 			' text-' +
 			colorSchemes[colorScheme].c2 +
 			' hover:bg-' +
-			colorSchemes[colorScheme].c2 +
+			colorSchemes[colorScheme].c3 +
 			' hover:text-' +
 			colorSchemes[colorScheme].c1,
 		borderless: 'text-' + colorSchemes[colorScheme].c1 + ' hover:bg-' + colorSchemes[colorScheme].c3
