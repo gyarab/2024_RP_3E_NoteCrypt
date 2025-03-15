@@ -3,7 +3,6 @@
 	import '../app.css';
 	let { children } = $props();
 	onMount(() => {
-		document.body.classList.add('dark');
 		document.body.classList.add('bg-background');
 		document.body.classList.add('text-text');
 		document.body.classList.add('transition-colors');

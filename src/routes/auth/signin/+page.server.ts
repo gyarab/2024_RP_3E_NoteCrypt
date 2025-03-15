@@ -1,6 +1,6 @@
 import prisma from '$lib/prisma';
 import { lucia } from '$lib/server/auth';
-import { fail, redirect, type Actions } from '@sveltejs/kit';
+import { fail, type Actions } from '@sveltejs/kit';
 import bcryptjs from 'bcryptjs';
 const { compare } = bcryptjs;
 
@@ -16,12 +16,12 @@ export const actions: Actions = {
       }
     });
 
-    if (!user) return fail(400, { reason: 'nonexistent' });
+    if (!user) return fail(400, { msg: 'userNotFound' });
 
     const passwordMatch = await compare(password as string, user.passwordHash);
 
     if (!passwordMatch) {
-      return fail(400, { reason: 'incorrectPassword' });
+      return fail(400, { msg: 'incorrectPassword' });
     }
 
     const session = await lucia.createSession(user.id, {});
@@ -31,6 +31,6 @@ export const actions: Actions = {
       ...sessionCookie.attributes
     });
 
-    redirect(302, '/test');
+    return { msg: 'ok' };
   }
 };
