@@ -1,8 +1,8 @@
 <button
-	class="flex aspect-square w-40 min-w-40 flex-col gap-1 rounded-lg border-2 border-primary-200 bg-primary-100 p-2 transition-colors hover:bg-primary-200"
+	class="flex aspect-square w-40 min-w-40 flex-col gap-1 rounded-lg border-2 border-secondary-200 bg-secondary-100 p-2 hover:bg-secondary-200"
 >
-	<h3 class="max-w-full truncate font-semibold text-primary">Nadpis</h3>
-	<hr class="border-t-2 transition-colors w-full border-primary-200" />
+	<h3 class="max-w-full truncate font-semibold text-secondary">Nadpis</h3>
+	<hr class="w-full border-t-2 border-secondary-200" />
 	<p class="line-clamp-4 max-h-full text-ellipsis text-start text-xs">
 		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
 		labore et dolore magna aliqua. Nisl tincidunt eget nullam non. Quis hendrerit dolor magna eget
@@ -29,5 +29,7 @@
 		lorem ipsum dolor sit.
 	</p>
 	<div class="grow"></div>
-	<span class="self-end text-primary-200 fill material-symbols-outlined" style="font-size:1.25rem">keep</span>
+	<span class="fill material-symbols-outlined self-end text-secondary-200" style="font-size:1.25rem"
+		>keep</span
+	>
 </button>

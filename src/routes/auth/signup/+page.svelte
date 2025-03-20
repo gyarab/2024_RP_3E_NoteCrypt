@@ -31,19 +31,19 @@
 			/>
 			<input
 				required
-        placeholder="Confirm password"
+				placeholder="Confirm password"
 				type="password"
-				name="password"
-				class="placeholder:text-background-200 rounded-lg border border-primary bg-background p-2"
+				name="confirmPassword"
+				class="rounded-lg border border-primary bg-background p-2 placeholder:text-background-200"
 			/>
 		</div>
 		<Button additionalStyle="my-8 w-full max-w-64" colorScheme="text800">
-			<span class="material-symbols-outlined">login</span>
+			<span class="material-symbols-outlined">person_add</span>
 			<h3 class="font-semibold">Sign Up</h3>
 		</Button>
 		<p class="text-sm text-background-400">
-			Don't have an account yet?
-			<a href="/auth/signup" class="ml-2 text-background-600"> Sign up!</a>
+			Already have an account?
+			<a href="/auth/signin" class="ml-2 text-background-600">Sign in!</a>
 		</p>
 	</form>
 </div>

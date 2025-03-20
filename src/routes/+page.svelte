@@ -28,8 +28,13 @@
 			</div>
 		{:else}
 			<div class="mb-8 w-full">
-				<Button click={() => goto('/app')} additionalStyle="w-full mb-1">My Dashboard</Button>
-				<p class="text-center text-xs text-background-400">Logged in as {data.user.username}</p>
+				<Button click={() => goto('/home')} additionalStyle="w-full mb-2">My Dashboard</Button>
+				<div class="flex justify-center gap-2">
+					<form method="POST" class="flex justify-center gap-2">
+						<p class="text-xs text-background-400">Logged in as {data.user.username}</p>
+						<button class="text-xs text-secondary underline">Sign out</button>
+					</form>
+				</div>
 			</div>
 		{/if}
 

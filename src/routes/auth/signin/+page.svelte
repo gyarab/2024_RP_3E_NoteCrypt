@@ -41,7 +41,7 @@
 		if (r.data?.msg) {
 			switch (r.data.msg) {
 				case 'ok':
-					goto('/test');
+					goto('/home');
 					break;
 				case 'userNotFound':
 					toggleError('email', 'No user with this email exists!');
@@ -107,7 +107,7 @@
 		</Button>
 		<p class="text-sm text-background-400">
 			Don't have an account yet?
-			<a href="/auth/signup" class="ml-2 text-background-600"> Sign up!</a>
+			<a href="/auth/signup" class="ml-2 text-background-600">Sign up!</a>
 		</p>
 	</form>
 </div>
