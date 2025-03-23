@@ -1,5 +1,6 @@
 <script lang="ts">
 	import CreateButton from '$lib/components/createButton.svelte';
+	import CreateNote from '$lib/components/createNote.svelte';
 	import Navbar from '$lib/components/navbar.svelte';
 	import Pinned from '$lib/components/pinned.svelte';
 	import Recent from '$lib/components/recent.svelte';
@@ -10,17 +11,24 @@
 	let innerWidth = $state(0);
 	let { data }: { data: PageData } = $props();
 
+	let editorOpen = $state(true);
+
 	function createNote() {
-		console.log('create note');
+		editorOpen = true;
 	}
 </script>
 
 <svelte:window bind:innerWidth />
 
 <Navbar pageData={data} />
-<CreateButton click={createNote} />
+
+{#if editorOpen}
+	<CreateNote />
+{/if}
+
 <div class="md:mx-auto md:w-4/5">
 	<Searchbar />
+	<!-- <CreateButton click={createNote} /> -->
 	<SectionTitle title="Pinned" icon="keep" />
 	<div
 		class="mx-4 mb-8 flex gap-4 overflow-x-scroll rounded-lg bg-background-50 p-4 transition-colors"

@@ -2,7 +2,7 @@
 	import type { PageData } from '../../routes/$types';
 	import Button from './button.svelte';
 
-	let { open = $bindable(false), pageData }: { open: boolean, pageData?: PageData } = $props();
+	let { open = $bindable(false), pageData }: { open: boolean; pageData?: PageData } = $props();
 	let innerWidth = $state(0);
 
 	$effect(() => {
@@ -17,7 +17,7 @@
 <svelte:window bind:innerWidth />
 
 <div
-	class="fixed bottom-0 left-0 top-0 z-30 flex h-full w-2/3 flex-col items-center bg-background-50 pt-16 text-text-800 transition-all md:w-72 {open
+	class="fixed bottom-0 left-0 top-0 z-40 flex h-full w-2/3 flex-col items-center bg-background-50 pt-16 text-text-800 transition-all md:w-72 {open
 		? ''
 		: '-translate-x-full'}"
 >
@@ -46,10 +46,19 @@
 	</Button>
 	<div class="grow"></div>
 
-	<Button preset="borderless" colorScheme="text800" disableDefaults={true} additionalStyle="flex transition-colors flex-col items-center rounded-lg p-2">
+	<Button
+		preset="borderless"
+		colorScheme="text800"
+		disableDefaults={true}
+		additionalStyle="flex transition-colors flex-col items-center rounded-lg p-2"
+	>
 		<span style="font-size:4rem" class="material-symbols-outlined fill -mb-2">person</span>
-		<h2 class="max-w-full truncate font-bold">{pageData?.user?.username ? pageData.user.username : "User"}</h2>
-		<h3 class="mb-4 max-w-full truncate text-xs text-primary-600">{pageData?.user?.email ? pageData.user.email : "email@example.com"}</h3>
+		<h2 class="max-w-full truncate font-bold">
+			{pageData?.user?.username ? pageData.user.username : 'User'}
+		</h2>
+		<h3 class="mb-4 max-w-full truncate text-xs text-primary-600">
+			{pageData?.user?.email ? pageData.user.email : 'email@example.com'}
+		</h3>
 	</Button>
 
 	<div class="grow"></div>
@@ -61,7 +70,7 @@
 {#if open}
 	<!-- svelte-ignore a11y_consider_explicit_label -->
 	<button
-		class="fixed bottom-0 left-0 right-0 top-0 z-20 bg-background opacity-80 transition-all lg:hidden"
+		class="fixed bottom-0 left-0 right-0 top-0 z-30 bg-background opacity-80 transition-all lg:hidden"
 		onclick={() => (open = false)}
 	></button>
 {/if}

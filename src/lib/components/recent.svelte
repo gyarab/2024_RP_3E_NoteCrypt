@@ -1,5 +1,5 @@
 <button
-	class="flex aspect-square w-40 min-w-40 flex-col gap-1 rounded-lg border-2 border-accent-200 bg-accent-100 p-2 hover:bg-accent-200"
+	class="flex aspect-square w-40 min-w-40 flex-col gap-1 rounded-lg border-2 border-accent-200 bg-accent-100 p-2 transition-colors hover:bg-accent-200"
 >
 	<h3 class="max-w-full truncate font-semibold text-accent">Nadpis</h3>
 	<hr class="w-full border-t-2 border-accent-200" />
