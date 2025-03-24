@@ -2,7 +2,7 @@
 	class="flex aspect-square w-40 min-w-40 flex-col gap-1 rounded-lg border-2 border-accent-200 bg-accent-100 p-2 transition-colors hover:bg-accent-200"
 >
 	<h3 class="max-w-full truncate font-semibold text-accent">Nadpis</h3>
-	<hr class="w-full border-t-2 border-accent-200 transition-colors" />
+	<hr class="w-full border-t-2 border-accent-200" />
 	<p class="line-clamp-4 max-h-full text-ellipsis text-start text-xs">
 		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
 		labore et dolore magna aliqua. Nisl tincidunt eget nullam non. Quis hendrerit dolor magna eget
@@ -29,5 +29,5 @@
 		lorem ipsum dolor sit.
 	</p>
 	<div class="grow"></div>
-	<h4 class="self-end text-end text-sm text-accent-200 font-bold">9/11 at 10:00</h4>
+	<h4 class="self-end text-end text-sm font-bold text-accent-200">9/11 at 10:00</h4>
 </button>

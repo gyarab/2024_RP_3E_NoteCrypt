@@ -1,7 +1,7 @@
 import prisma from '$lib/prisma';
 import { lucia } from '$lib/server/auth';
 import { hashPassword } from '$lib/server/hashPassword';
-import { redirect, type Actions } from '@sveltejs/kit';
+import { fail, redirect, type Actions } from '@sveltejs/kit';
 import { generateIdFromEntropySize } from 'lucia';
 
 export const actions: Actions = {
@@ -10,6 +10,11 @@ export const actions: Actions = {
     const username = formData.get('username');
     const email = formData.get('email');
     const password = formData.get('password');
+    const confirmPassword = formData.get('confirmPassword');
+
+    if (password !== confirmPassword) {
+      return fail(400, { msg: 'passwordsDontMatch' });
+    }
 
     const userId = generateIdFromEntropySize(10);
     const passwordHash = await hashPassword(password as string);
@@ -30,6 +35,6 @@ export const actions: Actions = {
       ...sessionCookie.attributes
     });
 
-    redirect(302, '/test');
+    redirect(302, '/home');
   }
 };

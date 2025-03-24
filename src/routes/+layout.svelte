@@ -3,7 +3,6 @@
 	import '../app.css';
 	let { children } = $props();
 	onMount(() => {
-		//document.body.classList.add('dark');
 		document.body.classList.add('bg-background');
 		document.body.classList.add('text-text');
 		document.body.classList.add('transition-colors');
@@ -11,6 +10,7 @@
 </script>
 
 <svelte:head>
+  <title>NoteCrypt</title>
 	<link
 		rel="stylesheet"
 		href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"

@@ -70,7 +70,7 @@
 			' text-' +
 			colorSchemes[colorScheme].c2 +
 			' hover:bg-' +
-			colorSchemes[colorScheme].c2 +
+			colorSchemes[colorScheme].c3 +
 			' hover:text-' +
 			colorSchemes[colorScheme].c1,
 		borderless: 'text-' + colorSchemes[colorScheme].c1 + ' hover:bg-' + colorSchemes[colorScheme].c3
@@ -119,7 +119,9 @@
 <div
 	class="hidden border-text-800 bg-text-800 text-text-800 hover:bg-text-800 hover:text-text-800"
 ></div>
-<div class="hidden border-text text-text"></div>
+<div
+	class="hidden border-text bg-text text-text hover:bg-text hover:text-text"
+></div>
 <div class="hidden hover:bg-primary-100"></div>
 <div class="hidden hover:bg-secondary-100"></div>
 <div class="hidden hover:bg-accent-100"></div>
