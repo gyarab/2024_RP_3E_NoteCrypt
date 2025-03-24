@@ -13,7 +13,7 @@
 <div class="mb-8 flex w-screen items-center justify-center p-4">
 	<div class="flex w-full flex-col md:w-2/3 xl:w-1/3">
 		<div
-			class="flex w-full items-center gap-2 rounded-t-lg bg-background-100 p-2 transition-colors"
+			class="flex w-full items-center gap-2 rounded-t-lg bg-background-100 p-4 transition-colors"
 		>
 			<input
 				id="titleInput"
@@ -29,7 +29,7 @@
 			</Button>
 		</div>
 		<textarea
-			class="h-48 resize-none rounded-b-lg bg-background-50 p-2 outline-none transition-colors placeholder:text-text-200"
+			class="h-48 resize-none rounded-b-lg bg-background-50 p-4 outline-none transition-colors placeholder:text-text-200"
 			placeholder="Content"
 		></textarea>
 	</div>
