@@ -32,7 +32,7 @@
 				<div class="flex justify-center gap-2">
 					<form method="POST" class="flex justify-center gap-2">
 						<p class="text-xs text-background-400">Logged in as {data.user.username}</p>
-						<button class="text-xs text-secondary underline">Sign out</button>
+						<button class="text-xs text-accent underline">Sign out</button>
 					</form>
 				</div>
 			</div>

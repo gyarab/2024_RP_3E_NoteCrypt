@@ -3,10 +3,10 @@
 	let search = $state('');
 
 	$effect(() => {
-		console.log(search);
+		// console.log(search);
 	});
 
-	let { createButtonClick }: { createButtonClick: Function } = $props();
+	let { createButtonClick = () => {} }: { createButtonClick?: Function } = $props();
 </script>
 
 <div class="mx-auto mb-8 flex h-20 items-center justify-center p-4 md:w-1/3">

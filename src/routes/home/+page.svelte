@@ -12,8 +12,72 @@
 
 	let editorOpen = $state(false);
 
-	function createNote() {
+	function openEditor() {
 		editorOpen = true;
+	}
+
+	function closeEditor() {
+		editorOpen = false;
+	}
+
+	async function deriveKey(pin: string): Promise<CryptoKey> {
+		const enc = new TextEncoder();
+		const salt = window.crypto.getRandomValues(new Uint8Array(16));
+
+		const keyMaterial = await window.crypto.subtle.importKey(
+			'raw',
+			enc.encode(pin),
+			{ name: 'PBKDF2' },
+			false,
+			['deriveKey']
+		);
+
+		return window.crypto.subtle.deriveKey(
+			{
+				name: 'PBKDF2',
+				salt: salt,
+				iterations: 100000,
+				hash: 'SHA-256'
+			},
+			keyMaterial,
+			{ name: 'AES-CBC', length: 256 },
+			false,
+			['encrypt', 'decrypt']
+		);
+	}
+
+	async function encryptMessage(message: string, pin: string): Promise<string> {
+		const key = await deriveKey(pin);
+		const iv = window.crypto.getRandomValues(new Uint8Array(16));
+		const enc = new TextEncoder();
+
+		const encrypted = await window.crypto.subtle.encrypt(
+			{ name: 'AES-CBC', iv },
+			key,
+			enc.encode(message)
+		);
+
+		return `${btoa(String.fromCharCode(...iv))}:${btoa(String.fromCharCode(...new Uint8Array(encrypted)))}`;
+	}
+
+	function save({
+		title,
+		content,
+		pin = null
+	}: {
+		title: string;
+		content: string;
+		pin: string | null;
+	}) {
+		if (pin) {
+			encryptMessage(content, pin)
+				.then((encrypted) => {
+					console.log('Encrypted Content:', encrypted);
+				})
+				.catch((err) => console.error('Encryption Error:', err));
+		} else {
+			console.log('No pin provided');
+		}
 	}
 </script>
 
@@ -22,11 +86,11 @@
 <Navbar pageData={data} />
 
 {#if editorOpen}
-	<CreateNote />
+	<CreateNote close={closeEditor} {save} />
 {/if}
 
 <div class="md:mx-auto md:w-4/5">
-	<Searchbar createButtonClick={createNote} />
+	<Searchbar createButtonClick={openEditor} />
 	<SectionTitle title="Pinned" icon="keep" />
 	<div
 		class="mx-4 mb-8 flex gap-4 overflow-x-scroll rounded-lg bg-background-50 p-4 transition-colors"

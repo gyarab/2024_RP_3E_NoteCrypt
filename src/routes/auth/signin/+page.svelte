@@ -52,7 +52,6 @@
 				default:
 					console.log(r);
 					toggleError('unknown', 'Unknown error');
-					toggleError('unknown', 'Unknown error');
 					break;
 			}
 		} else {
@@ -86,7 +85,7 @@
 			/>
 
 			{#if emailError}
-				<p class="mr-2 mt-1 text-right text-sm text-secondary-400">{errorMessage}</p>
+				<p class="mr-2 mt-1 text-right text-sm text-accent">{errorMessage}</p>
 			{/if}
 
 			<label for="password" class="ml-2 mt-4 text-primary">Password</label>
@@ -98,7 +97,7 @@
 			/>
 
 			{#if passwordError}
-				<p class="mr-2 mt-1 text-right text-sm text-secondary-400">{errorMessage}</p>
+				<p class="mr-2 mt-1 text-right text-sm text-accent">{errorMessage}</p>
 			{/if}
 		</div>
 		<Button additionalStyle="my-8 w-full max-w-64" colorScheme="text800">
