@@ -21,9 +21,41 @@
 		editorOpen = false;
 	}
 
+	function openNote(noteId: string, encrypted: boolean) {
+		fetch('/api/getNoteText?noteId=' + noteId, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		})
+			.then((response) => response.json())
+			.then((data) => {
+				if (data.success) {
+					if (!encrypted) {
+						console.log('Note content:', data.text);
+					} else {
+						const pin = '1234';
+						decryptText(data.text, pin).then((decryptedContent) => {
+							if (decryptedContent) {
+								console.log('Decrypted content:', decryptedContent);
+							} else {
+								console.log('Incorrect PIN');
+							}
+						});
+					}
+				} else {
+					console.log('Error fetching note text:', data.text);
+				}
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	}
+
 	async function deriveKey(pin: string): Promise<CryptoKey> {
 		const enc = new TextEncoder();
-		const salt = window.crypto.getRandomValues(new Uint8Array(16));
+		const saltString = data.user!.salt;
+		const salt = Uint8Array.from(atob(saltString), (c) => c.charCodeAt(0));
 
 		const keyMaterial = await window.crypto.subtle.importKey(
 			'raw',
@@ -47,7 +79,7 @@
 		);
 	}
 
-	async function encryptMessage(message: string, pin: string): Promise<string> {
+	async function encryptText(message: string, pin: string): Promise<string> {
 		const key = await deriveKey(pin);
 		const iv = window.crypto.getRandomValues(new Uint8Array(16));
 		const enc = new TextEncoder();
@@ -61,6 +93,28 @@
 		return `${btoa(String.fromCharCode(...iv))}:${btoa(String.fromCharCode(...new Uint8Array(encrypted)))}`;
 	}
 
+	async function decryptText(encryptedMessage: string, pin: string): Promise<string | null> {
+		const [ivBase64, dataBase64] = encryptedMessage.split(':');
+		if (!ivBase64 || !dataBase64) throw new Error('Invalid encrypted message format');
+
+		const key = await deriveKey(pin);
+		const dec = new TextDecoder();
+
+		const iv = Uint8Array.from(atob(ivBase64), (c) => c.charCodeAt(0));
+		const encryptedData = Uint8Array.from(atob(dataBase64), (c) => c.charCodeAt(0));
+
+		try {
+			const decrypted = await window.crypto.subtle.decrypt(
+				{ name: 'AES-CBC', iv },
+				key,
+				encryptedData
+			);
+			return dec.decode(decrypted);
+		} catch (error) {
+			return null;
+		}
+	}
+
 	async function save(title: string, content: string, pin: string) {
 		const form = document.getElementById('saveForm') as HTMLFormElement;
 		const titleInput = document.getElementById('titleInput') as HTMLInputElement;
@@ -68,7 +122,7 @@
 		const encryptedInput = document.getElementById('encryptedInput') as HTMLInputElement;
 
 		if (pin)
-			encryptMessage(content, pin).then((encryptedContent) => {
+			encryptText(content, pin).then((encryptedContent) => {
 				titleInput.value = title;
 				contentInput.value = encryptedContent;
 				encryptedInput.value = 'true';
@@ -100,7 +154,8 @@
 {/if}
 
 <div class="md:mx-auto md:w-4/5">
-	<Searchbar createButtonClick={openEditor} />
+	<Searchbar createButtonClick={openEditor} {editorOpen} />
+
 	<!-- <SectionTitle title="Pinned" icon="keep" /> -->
 	<!-- <div -->
 	<!-- 	class="mx-4 mb-8 flex gap-4 overflow-x-scroll rounded-lg bg-background-50 p-4 transition-colors" -->
@@ -114,7 +169,7 @@
 		class="mx-4 mb-8 flex gap-4 overflow-x-scroll rounded-lg bg-background-50 p-4 transition-colors"
 	>
 		{#each data.notes as note}
-			<Recent {note} />
+			<Recent {note} click={openNote} />
 		{/each}
 	</div>
 </div>

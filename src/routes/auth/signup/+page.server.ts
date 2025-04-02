@@ -3,6 +3,7 @@ import { lucia } from '$lib/server/auth';
 import { hashPassword } from '$lib/server/hashPassword';
 import { fail, redirect, type Actions } from '@sveltejs/kit';
 import { generateIdFromEntropySize } from 'lucia';
+import crypto from 'node:crypto';
 
 export const actions: Actions = {
   default: async (event) => {
@@ -19,12 +20,15 @@ export const actions: Actions = {
     const userId = generateIdFromEntropySize(10);
     const passwordHash = await hashPassword(password as string);
 
+    const salt = crypto.randomBytes(16).toString('base64');
+
     await prisma.user.create({
       data: {
         id: userId,
         email: email as string,
         username: username as string,
-        passwordHash: passwordHash as string
+        passwordHash: passwordHash as string,
+        salt: salt as string
       }
     });
 

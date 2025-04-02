@@ -34,17 +34,21 @@
 				placeholder="Title"
 				class="w-full grow bg-background-100 text-lg font-semibold text-text-800 outline-none transition-colors placeholder:text-text-200"
 			/>
-			<Button colorScheme="accent" preset="skeleton" click={close}>
-				<span class="material-symbols-outlined">delete</span>
-			</Button>
-			<Button colorScheme="primary" preset="fill" click={saveNote}>
-				<span class="material-symbols-outlined">save</span>
-			</Button>
 		</div>
 		<textarea
 			bind:value={content}
 			class="h-48 resize-none rounded-b-lg bg-background-50 p-4 outline-none transition-colors placeholder:text-text-200"
 			placeholder="Content"
 		></textarea>
+
+		<div class="flex w-full gap-2 mt-2">
+			<Button colorScheme="accent" preset="skeleton" click={close} additionalStyle="w-1/4">
+				<span class="material-symbols-outlined">delete</span>
+			</Button>
+			<Button colorScheme="primary" preset="fill" click={saveNote} additionalStyle="grow">
+				<span class="material-symbols-outlined">save</span>
+        <h3 class="font-semibold">Save</h3>
+			</Button>
+		</div>
 	</div>
 </div>

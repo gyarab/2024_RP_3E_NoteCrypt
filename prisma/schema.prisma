@@ -14,7 +14,9 @@ model User {
   email        String    @unique
   username     String
   passwordHash String
-  Note         Note[]
+  salt         String
+
+  Note Note[]
 }
 
 model Session {
