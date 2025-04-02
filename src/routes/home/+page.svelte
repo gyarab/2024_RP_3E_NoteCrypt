@@ -5,6 +5,7 @@
 	import Recent from '$lib/components/recent.svelte';
 	import Searchbar from '$lib/components/searchbar.svelte';
 	import SectionTitle from '$lib/components/sectionTitle.svelte';
+	import { onMount } from 'svelte';
 	import type { PageData } from './$types';
 
 	let innerWidth = $state(0);
@@ -60,26 +61,35 @@
 		return `${btoa(String.fromCharCode(...iv))}:${btoa(String.fromCharCode(...new Uint8Array(encrypted)))}`;
 	}
 
-	function save({
-		title,
-		content,
-		pin = null
-	}: {
-		title: string;
-		content: string;
-		pin: string | null;
-	}) {
-		if (pin) {
-			encryptMessage(content, pin)
-				.then((encrypted) => {
-					console.log('Encrypted Content:', encrypted);
-				})
-				.catch((err) => console.error('Encryption Error:', err));
-		} else {
-			console.log('No pin provided');
+	async function save(title: string, content: string, pin: string) {
+		const form = document.getElementById('saveForm') as HTMLFormElement;
+		const titleInput = document.getElementById('titleInput') as HTMLInputElement;
+		const contentInput = document.getElementById('contentInput') as HTMLInputElement;
+		const encryptedInput = document.getElementById('encryptedInput') as HTMLInputElement;
+
+		if (pin)
+			encryptMessage(content, pin).then((encryptedContent) => {
+				titleInput.value = title;
+				contentInput.value = encryptedContent;
+				encryptedInput.value = 'true';
+
+				form.requestSubmit();
+			});
+		else {
+			titleInput.value = title;
+			contentInput.value = content;
+			encryptedInput.value = 'false';
+
+			form.requestSubmit();
 		}
 	}
 </script>
+
+<form id="saveForm" action="?/save" method="POST" hidden>
+	<input type="text" name="title" id="titleInput" />
+	<input type="text" name="content" id="contentInput" />
+	<input type="text" name="encrypted" id="encryptedInput" />
+</form>
 
 <svelte:window bind:innerWidth />
 
@@ -91,20 +101,20 @@
 
 <div class="md:mx-auto md:w-4/5">
 	<Searchbar createButtonClick={openEditor} />
-	<SectionTitle title="Pinned" icon="keep" />
-	<div
-		class="mx-4 mb-8 flex gap-4 overflow-x-scroll rounded-lg bg-background-50 p-4 transition-colors"
-	>
-		{#each Array.from({ length: 10 }) as _}
-			<Pinned />
-		{/each}
-	</div>
+	<!-- <SectionTitle title="Pinned" icon="keep" /> -->
+	<!-- <div -->
+	<!-- 	class="mx-4 mb-8 flex gap-4 overflow-x-scroll rounded-lg bg-background-50 p-4 transition-colors" -->
+	<!-- > -->
+	<!-- 	{#each data.notes as note} -->
+	<!-- 		<Pinned title={note.title} /> -->
+	<!-- 	{/each} -->
+	<!-- </div> -->
 	<SectionTitle title="Recent" icon="history" />
 	<div
 		class="mx-4 mb-8 flex gap-4 overflow-x-scroll rounded-lg bg-background-50 p-4 transition-colors"
 	>
-		{#each Array.from({ length: 10 }) as _}
-			<Recent />
+		{#each data.notes as note}
+			<Recent {note} />
 		{/each}
 	</div>
 </div>

@@ -12,7 +12,7 @@ model User {
   id           String    @id
   sessions     Session[]
   email        String    @unique
-  username     String?
+  username     String
   passwordHash String
   Note         Note[]
 }
@@ -26,12 +26,12 @@ model Session {
 }
 
 model Note {
-  id        String   @id
-  title     String?
-  content   String
+  id        String   @id @default(uuid())
+  title     String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   userId    String
+  encrypted Boolean
 
   user User @relation(references: [id], fields: [userId], onDelete: Cascade)
 }

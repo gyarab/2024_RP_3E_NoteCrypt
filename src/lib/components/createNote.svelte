@@ -9,13 +9,18 @@
 		}
 	});
 
-	let { close = () => {}, save = () => {} }: { close?: Function; save?: Function } = $props();
+	let { close, save }: { close: Function; save: Function } = $props();
 
-  function saveNote() {
-    const title = (document.getElementById('titleInput') as HTMLInputElement).value;
-    const content = (document.getElementById('contentInput') as HTMLTextAreaElement).value;
-    save({ title, content });
-  }
+	let title = $state('');
+	let content = $state('');
+	let pin = $state('');
+
+	function saveNote() {
+		if (!title || !content) {
+			return;
+		}
+		save(title, content, pin);
+	}
 </script>
 
 <div class="mb-8 flex w-full items-center justify-center p-4">
@@ -24,12 +29,12 @@
 			class="flex w-full items-center gap-2 rounded-t-lg bg-background-100 p-4 transition-colors"
 		>
 			<input
-				id="titleInput"
+				bind:value={title}
 				type="text"
 				placeholder="Title"
 				class="w-full grow bg-background-100 text-lg font-semibold text-text-800 outline-none transition-colors placeholder:text-text-200"
 			/>
-			<Button colorScheme="accent" preset="skeleton" type="button" click={close}>
+			<Button colorScheme="accent" preset="skeleton" click={close}>
 				<span class="material-symbols-outlined">delete</span>
 			</Button>
 			<Button colorScheme="primary" preset="fill" click={saveNote}>
@@ -37,7 +42,7 @@
 			</Button>
 		</div>
 		<textarea
-      id="contentInput"
+			bind:value={content}
 			class="h-48 resize-none rounded-b-lg bg-background-50 p-4 outline-none transition-colors placeholder:text-text-200"
 			placeholder="Content"
 		></textarea>
