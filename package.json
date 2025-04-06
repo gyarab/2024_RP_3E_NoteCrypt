@@ -16,7 +16,9 @@
 		"@sveltejs/kit": "^2.0.0",
 		"@sveltejs/vite-plugin-svelte": "^4.0.0",
 		"@types/eslint": "^9.6.0",
+		"@types/node": "^22.13.14",
 		"autoprefixer": "^10.4.20",
+		"eruda": "^3.4.1",
 		"eslint": "^9.7.0",
 		"eslint-config-prettier": "^9.1.0",
 		"eslint-plugin-svelte": "^2.36.0",
@@ -25,7 +27,7 @@
 		"prettier": "^3.3.2",
 		"prettier-plugin-svelte": "^3.2.6",
 		"prettier-plugin-tailwindcss": "^0.6.5",
-		"prisma": "^6.0.1",
+		"prisma": "^6.5.0",
 		"svelte": "^5.0.0",
 		"svelte-check": "^4.0.0",
 		"tailwindcss": "^3.4.9",
@@ -35,6 +37,7 @@
 	},
 	"dependencies": {
 		"@lucia-auth/adapter-prisma": "^4.0.1",
+		"@prisma/client": "^6.5.0",
 		"@types/bcryptjs": "^2.4.6",
 		"bcryptjs": "^2.4.3"
 	}

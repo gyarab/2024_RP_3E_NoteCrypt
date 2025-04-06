@@ -29,22 +29,22 @@
 	>
 		<span class="material-symbols-outlined">close</span>
 	</Button>
-	<!-- <Button icon="history" text="Recent" css="text-sm w-full p-4" /> -->
-	<Button preset="borderless" colorScheme="text800">
-		<span class="material-symbols-outlined">history</span>
-		<span>Recent</span>
-	</Button>
-	<hr class="my-1 w-1/4 border-t-2 border-background-200" />
-	<Button preset="borderless" colorScheme="text800">
-		<span class="material-symbols-outlined">bookmark</span>
-		<span>Bookmarked</span>
-	</Button>
-	<hr class="my-1 w-1/4 border-t-2 border-background-200" />
-	<Button preset="borderless" colorScheme="text800">
-		<span class="material-symbols-outlined">keep</span>
-		<span>Pinned</span>
-	</Button>
-	<div class="grow"></div>
+
+	<!-- <Button preset="borderless" colorScheme="text800"> -->
+	<!-- 	<span class="material-symbols-outlined">history</span> -->
+	<!-- 	<span>Recent</span> -->
+	<!-- </Button> -->
+	<!-- <hr class="my-1 w-1/4 border-t-2 border-background-200" /> -->
+	<!-- <Button preset="borderless" colorScheme="text800"> -->
+	<!-- 	<span class="material-symbols-outlined">bookmark</span> -->
+	<!-- 	<span>Bookmarked</span> -->
+	<!-- </Button> -->
+	<!-- <hr class="my-1 w-1/4 border-t-2 border-background-200" /> -->
+	<!-- <Button preset="borderless" colorScheme="text800"> -->
+	<!-- 	<span class="material-symbols-outlined">keep</span> -->
+	<!-- 	<span>Pinned</span> -->
+	<!-- </Button> -->
+	<!-- <div class="grow"></div> -->
 
 	<Button
 		preset="borderless"

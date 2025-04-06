@@ -3,20 +3,25 @@
 	let search = $state('');
 
 	$effect(() => {
-		console.log(search);
+		// console.log(search);
 	});
 
-	let { createButtonClick }: { createButtonClick: Function } = $props();
+	let {
+		createButtonClick = () => {},
+		editorOpen = false
+	}: { createButtonClick?: Function; editorOpen?: boolean } = $props();
 </script>
 
 <div class="mx-auto mb-8 flex h-20 items-center justify-center p-4 md:w-1/3">
-	<Button
-		click={createButtonClick}
-		disableDefaults={true}
-		additionalStyle="rounded-full flex items-center justify-center h-full aspect-square mr-4 transition-colors"
-	>
-		<span class="material-symbols-outlined">add</span>
-	</Button>
+	{#if !editorOpen}
+		<Button
+			click={createButtonClick}
+			disableDefaults={true}
+			additionalStyle="rounded-full flex items-center justify-center h-full aspect-square mr-4 transition-colors"
+		>
+			<span class="material-symbols-outlined">add</span>
+		</Button>
+	{/if}
 	<input
 		type="text"
 		class="h-full grow rounded-l-full bg-background-100 pl-4 outline-none transition-colors placeholder:font-semibold placeholder:text-text-200"
