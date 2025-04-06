@@ -16,9 +16,9 @@
 				.then((response) => response.json())
 				.then((data) => {
 					if (data.success) {
-						content = data.text;
+						content = data.content;
 					} else {
-						console.log('Error fetching note text:', data.text);
+						console.log('Error fetching note text:', data.content);
 					}
 				})
 				.catch((error) => {

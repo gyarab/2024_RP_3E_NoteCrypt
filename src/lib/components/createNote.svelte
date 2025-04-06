@@ -2,17 +2,22 @@
 	import { onMount } from 'svelte';
 	import Button from './button.svelte';
 
+	let titleInput: HTMLInputElement;
 	onMount(() => {
-		const titleInput = document.getElementById('titleInput');
 		if (titleInput) {
 			titleInput.focus();
 		}
 	});
 
-	let { close, save }: { close: Function; save: Function } = $props();
+	let {
+		close,
+		save,
+		defaultTitle = '',
+		defaultContent = ''
+	}: { close: Function; save: Function; defaultTitle?: string; defaultContent?: string } = $props();
 
-	let title = $state('');
-	let content = $state('');
+	let title = $state(defaultTitle);
+	let content = $state(defaultContent);
 	let pin = $state('');
 
 	function saveNote() {
@@ -29,6 +34,7 @@
 			class="flex w-full items-center gap-2 rounded-t-lg bg-background-100 p-4 transition-colors"
 		>
 			<input
+				bind:this={titleInput}
 				bind:value={title}
 				type="text"
 				placeholder="Title"
@@ -41,13 +47,13 @@
 			placeholder="Content"
 		></textarea>
 
-		<div class="flex w-full gap-2 mt-2">
+		<div class="mt-2 flex w-full gap-2">
 			<Button colorScheme="accent" preset="skeleton" click={close} additionalStyle="w-1/4">
 				<span class="material-symbols-outlined">delete</span>
 			</Button>
 			<Button colorScheme="primary" preset="fill" click={saveNote} additionalStyle="grow">
 				<span class="material-symbols-outlined">save</span>
-        <h3 class="font-semibold">Save</h3>
+				<h3 class="font-semibold">Save</h3>
 			</Button>
 		</div>
 	</div>

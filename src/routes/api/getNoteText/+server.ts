@@ -19,13 +19,13 @@ export const GET: RequestHandler = async (event) => {
     }
   });
   if (!note) {
-    return json({ success: false, text: 'noteNotFound' });
+    return json({ success: false, content: 'noteNotFound' });
   }
   try {
     const noteText = await readFile(`notes/${noteId}.txt`, 'utf-8');
-    return json({ success: true, text: noteText });
+    return json({ success: true, content: noteText, title: note.title, id: note.id });
   } catch (error) {
     console.error('Error reading file:', error);
-    return json({ success: false, text: 'noteNotFound' });
+    return json({ success: false, content: 'noteNotFound' });
   }
 };

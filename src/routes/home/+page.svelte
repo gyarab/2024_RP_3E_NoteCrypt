@@ -1,56 +1,13 @@
 <script lang="ts">
 	import CreateNote from '$lib/components/createNote.svelte';
 	import Navbar from '$lib/components/navbar.svelte';
-	import Pinned from '$lib/components/pinned.svelte';
 	import Recent from '$lib/components/recent.svelte';
 	import Searchbar from '$lib/components/searchbar.svelte';
 	import SectionTitle from '$lib/components/sectionTitle.svelte';
-	import { onMount } from 'svelte';
 	import type { PageData } from './$types';
 
 	let innerWidth = $state(0);
 	let { data }: { data: PageData } = $props();
-
-	let editorOpen = $state(false);
-
-	function openEditor() {
-		editorOpen = true;
-	}
-
-	function closeEditor() {
-		editorOpen = false;
-	}
-
-	function openNote(noteId: string, encrypted: boolean) {
-		fetch('/api/getNoteText?noteId=' + noteId, {
-			method: 'GET',
-			headers: {
-				'Content-Type': 'application/json'
-			}
-		})
-			.then((response) => response.json())
-			.then((data) => {
-				if (data.success) {
-					if (!encrypted) {
-						console.log('Note content:', data.text);
-					} else {
-						const pin = '1234';
-						decryptText(data.text, pin).then((decryptedContent) => {
-							if (decryptedContent) {
-								console.log('Decrypted content:', decryptedContent);
-							} else {
-								console.log('Incorrect PIN');
-							}
-						});
-					}
-				} else {
-					console.log('Error fetching note text:', data.text);
-				}
-			})
-			.catch((error) => {
-				console.log(error);
-			});
-	}
 
 	async function deriveKey(pin: string): Promise<CryptoKey> {
 		const enc = new TextEncoder();
@@ -137,6 +94,57 @@
 			form.requestSubmit();
 		}
 	}
+
+	let editorOpen = $state(false);
+
+	function openEditor() {
+		editorOpen = true;
+	}
+
+	function closeEditor() {
+		editorOpen = false;
+	}
+
+	let noteTitle = $state('');
+	let noteContent = $state('');
+
+	function openNote(noteId: string, encrypted: boolean) {
+		closeEditor();
+		fetch('/api/getNoteText?noteId=' + noteId, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		})
+			.then((response) => response.json())
+			.then((data) => {
+				if (data.success) {
+					if (!encrypted) {
+						console.log('Note content:', data.content);
+						noteTitle = data.title;
+						noteContent = data.content;
+						openEditor();
+					} else {
+						const pin = '1234';
+						decryptText(data.content, pin).then((decryptedContent) => {
+							if (decryptedContent) {
+								console.log('Decrypted content:', decryptedContent);
+								noteTitle = data.title;
+								noteContent = decryptedContent;
+								openEditor();
+							} else {
+								console.log('Incorrect PIN');
+							}
+						});
+					}
+				} else {
+					console.log('Error fetching note text:', data.content);
+				}
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	}
 </script>
 
 <form id="saveForm" action="?/save" method="POST" hidden>
@@ -150,7 +158,7 @@
 <Navbar pageData={data} />
 
 {#if editorOpen}
-	<CreateNote close={closeEditor} {save} />
+	<CreateNote close={closeEditor} {save} defaultTitle={noteTitle} defaultContent={noteContent} />
 {/if}
 
 <div class="md:mx-auto md:w-4/5">

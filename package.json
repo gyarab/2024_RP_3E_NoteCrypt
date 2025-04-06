@@ -18,6 +18,7 @@
 		"@types/eslint": "^9.6.0",
 		"@types/node": "^22.13.14",
 		"autoprefixer": "^10.4.20",
+		"eruda": "^3.4.1",
 		"eslint": "^9.7.0",
 		"eslint-config-prettier": "^9.1.0",
 		"eslint-plugin-svelte": "^2.36.0",

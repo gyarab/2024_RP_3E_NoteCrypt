@@ -27,14 +27,14 @@
 				required
 				type="password"
 				name="password"
-				class="mb-2 rounded-lg border border-primary bg-background p-2"
+				class=" rounded-t-lg border border-b border-b-primary border-primary bg-background p-2"
 			/>
 			<input
 				required
 				placeholder="Confirm password"
 				type="password"
 				name="confirmPassword"
-				class="rounded-lg border border-primary bg-background p-2 placeholder:text-background-200"
+				class="rounded-b-lg border-x border-b border-primary bg-background p-2 placeholder:text-background-200"
 			/>
 		</div>
 		<Button additionalStyle="my-8 w-full max-w-64" colorScheme="text800">
