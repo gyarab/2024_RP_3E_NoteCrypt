@@ -28,7 +28,7 @@
 </script>
 
 <button
-	onclick={() => click(note.id, note.encrypted)}
+	onclick={() => click(note.id, note.encrypted, note.pinned)}
 	class="flex aspect-square w-40 min-w-40 flex-col gap-1 rounded-lg border-2 border-secondary-200 bg-secondary-100 p-2 transition-colors hover:bg-secondary-200"
 >
 	<h3 class="max-w-full truncate font-semibold text-secondary">{note.title}</h3>

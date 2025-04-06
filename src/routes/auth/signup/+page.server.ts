@@ -14,7 +14,17 @@ export const actions: Actions = {
     const confirmPassword = formData.get('confirmPassword');
 
     if (password !== confirmPassword) {
-      return fail(400, { msg: 'passwordsDontMatch' });
+      return fail(400, { msg: 'passwordMismatch' });
+    }
+
+    const existingUser = await prisma.user.findUnique({
+      where: {
+        email: email as string
+      }
+    });
+
+    if (existingUser) {
+      return fail(400, { msg: 'userAlreadyExists' });
     }
 
     const userId = generateIdFromEntropySize(10);
@@ -39,6 +49,6 @@ export const actions: Actions = {
       ...sessionCookie.attributes
     });
 
-    redirect(302, '/home');
+    return { msg: 'ok' };
   }
 };

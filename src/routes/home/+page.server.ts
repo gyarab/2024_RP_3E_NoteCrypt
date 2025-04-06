@@ -20,15 +20,44 @@ export const actions: Actions = {
   save: async (event) => {
     const formData = await event.request.formData();
 
-    console.log('formData', formData);
-
     const title = formData.get('title');
     const encryptedContent = formData.get('content');
     const encrypted = formData.get('encrypted');
+    const id = formData.get('id');
+
     const uuid = crypto.randomUUID();
 
     if (!title || !encryptedContent || !event.locals.user) {
       return fail(400, { msg: 'missingFields' });
+    }
+
+    if (id) {
+      console.log('updating', id);
+
+      const note = await prisma.note.findUnique({
+        where: {
+          id: id as string,
+          userId: event.locals.user.id
+        }
+      });
+
+      if (!note) {
+        return fail(400, { msg: 'noteNotFound' });
+      }
+
+      await prisma.note.update({
+        where: {
+          id: id as string
+        },
+        data: {
+          title: title as string,
+          encrypted: encrypted === 'true'
+        }
+      });
+
+      await writeFile(`./notes/${id}.txt`, encryptedContent as string);
+
+      return { msg: 'ok' };
     }
 
     await prisma.note.create({

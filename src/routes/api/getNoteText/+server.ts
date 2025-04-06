@@ -1,5 +1,5 @@
 import prisma from '$lib/prisma';
-import { fail, json, type RequestHandler } from '@sveltejs/kit';
+import { json, type RequestHandler } from '@sveltejs/kit';
 import { readFile } from 'node:fs/promises';
 
 export const GET: RequestHandler = async (event) => {
@@ -7,10 +7,10 @@ export const GET: RequestHandler = async (event) => {
   const noteId = event.url.searchParams.get('noteId');
 
   if (!user) {
-    return json({ success: false, text: 'notLoggedIn' });
+    return json({ success: false, content: 'notLoggedIn' });
   }
   if (!noteId) {
-    return json({ success: false, text: 'noteIdMissing' });
+    return json({ success: false, content: 'noteIdMissing' });
   }
   const note = await prisma.note.findUnique({
     where: {

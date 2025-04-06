@@ -34,6 +34,7 @@ model Note {
   updatedAt DateTime @updatedAt
   userId    String
   encrypted Boolean
+  pinned    Boolean  @default(false)
 
   user User @relation(references: [id], fields: [userId], onDelete: Cascade)
 }
