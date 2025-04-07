@@ -50,9 +50,10 @@
 			<li>Set PINs for your notes</li>
 			<li>Client-side encryption</li>
 			<li>Simple and easy to use UI</li>
+			<li>Access your notes securely anytime, anywhere</li>
 		</ul>
 
-		<div class="text-xs text-background-400 md:text-sm">Developed by: Kubík, Nikča, Šíma</div>
+		<div class="text-xs text-background-400 md:text-sm">Developed by Kubík, Nikča, Šíma</div>
 	</div>
 
 	<div class="order-1 aspect-square max-h-48 max-w-48 grow md:order-2 md:max-h-64 md:max-w-64">

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Navbar from '$lib/components/navbar.svelte';
+	import NoteCard from '$lib/components/noteCard.svelte';
 	import NoteEditor from '$lib/components/noteEditor.svelte';
 	import PinInput from '$lib/components/pinInput.svelte';
 	import Pinned from '$lib/components/pinned.svelte';
@@ -83,7 +84,6 @@
 		}
 	}
 
-	// Ostatni
 	async function save(title: string, content: string, pin: string | null, noteId: string = '') {
 		currentNoteId = noteId;
 
@@ -132,7 +132,7 @@
 	function getPinAndOpen(noteId: string, encrypted: boolean, pinned: boolean) {
 		closeEditor();
 		currentNoteId = noteId;
-    notePinned = pinned;
+		notePinned = pinned;
 		encrypted ? openPinInput(false) : openNote(noteId);
 	}
 
@@ -198,6 +198,8 @@
 			})
 			.catch(console.error);
 	}
+
+	let search = $state('');
 </script>
 
 <form bind:this={saveForm} action="?/save" method="POST" hidden>
@@ -244,30 +246,53 @@
 			openEditor();
 		}}
 		{editorOpen}
+		searchUpdated={(val: string) => (search = val)}
 	/>
 
-	{#if pinnedNotes.length > 0}
-		<SectionTitle title="Pinned" icon="keep" />
+	{#if !search && data.notes.length > 0}
+		{#if pinnedNotes.length > 0}
+			<SectionTitle title="Pinned" icon="keep" />
+			<div
+				class="mx-4 mb-8 flex gap-4 overflow-x-scroll rounded-lg bg-background-50 p-4 transition-colors"
+			>
+				{#each pinnedNotes as note}
+					<Pinned {note} click={getPinAndOpen} />
+				{/each}
+			</div>
+		{/if}
+
+		<SectionTitle title="Recent" icon="history" />
 		<div
 			class="mx-4 mb-8 flex gap-4 overflow-x-scroll rounded-lg bg-background-50 p-4 transition-colors"
 		>
-			{#each pinnedNotes as note}
-				<Pinned {note} click={getPinAndOpen} />
+			{#each data.notes.slice(0, 10) as note}
+				<Recent {note} click={getPinAndOpen} />
 			{/each}
 		</div>
 	{/if}
 
-	<SectionTitle title="Recent" icon="history" />
-	<div
-		class="mx-4 mb-8 flex gap-4 overflow-x-scroll rounded-lg bg-background-50 p-4 transition-colors"
-	>
-		{#each data.notes as note}
-			<Recent {note} click={getPinAndOpen} />
+	<SectionTitle
+		title={search.length > 0 ? 'Search results' : 'All notes'}
+		icon={search.length > 0 ? 'search' : 'notes'}
+	/>
+	<div class="mx-auto mb-8 flex flex-wrap gap-4 px-4">
+		{#each data.notes.filter((note) => note.title
+				.toLowerCase()
+				.includes(search.toLowerCase())) as note}
+			<NoteCard {note} click={getPinAndOpen} />
 		{/each}
 
-		{#if data.notes.length === 0}
+		{#if !search && data.notes.length === 0}
 			<p class="text-text-800">
 				You haven't created any notes yet. Write your first note by clicking the + button!
+			</p>
+		{/if}
+
+		{#if search && data.notes.filter((note) => note.title
+					.toLowerCase()
+					.includes(search.toLowerCase())).length === 0}
+			<p class="text-text-800">
+				No notes found with "{search}" in the title.
 			</p>
 		{/if}
 	</div>

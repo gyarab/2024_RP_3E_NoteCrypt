@@ -61,10 +61,7 @@
 	{/if}
 
 	<div class="grow"></div>
-	<Button preset="borderless" additionalStyle="mb-8" colorScheme="text800">
-		<span class="material-symbols-outlined">settings</span>
-		<span>Settings</span>
-	</Button>
+  <h3 class="p-4 text-text-800 text-xs">Developed by Kubík, Nikča, Šíma</h3>
 </div>
 {#if open}
 	<!-- svelte-ignore a11y_consider_explicit_label -->

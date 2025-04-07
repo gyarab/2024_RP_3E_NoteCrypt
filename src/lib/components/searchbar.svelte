@@ -3,13 +3,14 @@
 	let search = $state('');
 
 	$effect(() => {
-		// console.log(search);
+    searchUpdated(search);
 	});
 
 	let {
 		createButtonClick = () => {},
-		editorOpen = false
-	}: { createButtonClick?: Function; editorOpen?: boolean } = $props();
+		editorOpen = false, 
+    searchUpdated = () => {}
+	}: { createButtonClick?: Function; editorOpen?: boolean, searchUpdated?: Function } = $props();
 </script>
 
 <div class="mx-auto mb-8 flex h-20 items-center justify-center p-4 md:w-1/3">
@@ -24,8 +25,8 @@
 	{/if}
 	<input
 		type="text"
-		class="h-full grow rounded-l-full bg-background-100 pl-4 outline-none transition-colors placeholder:font-semibold placeholder:text-text-200"
-		placeholder="Search your notes"
+		class="h-full grow rounded-l-full bg-background-100 pl-4 outline-none transition-colors placeholder:text-primary-300"
+		placeholder="Search your notes (titles only)"
 		bind:value={search}
 	/>
 	<div

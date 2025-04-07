@@ -6,6 +6,7 @@
 
 	let passwordError = $state(false);
 	let emailError = $state(false);
+	let usernameError = $state(false);
 	let errorMessage = $state('');
 
 	function toggleError(type: string, message: string) {
@@ -26,6 +27,13 @@
 					errorMessage = '';
 				}, 3000);
 				break;
+			case 'username':
+				usernameError = true;
+				setTimeout(() => {
+					usernameError = false;
+					errorMessage = '';
+				}, 3000);
+				break;
 			default:
 				emailError = true;
 				passwordError = true;
@@ -40,20 +48,12 @@
 
 	function handleResponse(r: any) {
 		if (r.data?.msg) {
-			switch (r.data.msg) {
-				case 'ok':
-					goto('/home');
-					break;
-				case 'userAlreadyExists':
-					toggleError('email', 'User with this already exists!');
-					break;
-				case 'passwordMismatch':
-					toggleError('password', "Passwords don't match!");
-					break;
-				default:
-					console.log(r);
-					toggleError('unknown', 'Unknown error');
-					break;
+			if (r.data.msg === 'ok') {
+				goto('/home');
+			} else {
+				if (r.data.path) {
+					toggleError(r.data.path, r.data.msg);
+				}
 			}
 		} else {
 			console.log(r);
@@ -82,7 +82,14 @@
 		<h1 class="mb-4 text-xl font-semibold text-text-800">Create your NoteCrypt account!</h1>
 		<div class="flex w-full max-w-96 flex-col">
 			<label for="username" class="ml-2 text-primary">Username</label>
-			<input required name="username" class="rounded-lg border border-primary bg-background p-2" />
+			<input
+				required
+				name="username"
+				class="rounded-lg border border-primary bg-background p-2 transition-colors"
+			/>
+			{#if usernameError}
+				<p class="mr-2 mt-1 text-right text-sm text-accent">{errorMessage}</p>
+			{/if}
 
 			<label for="email" class="ml-2 mt-4 text-primary">Email</label>
 			<input
@@ -108,7 +115,7 @@
 				placeholder="Confirm password"
 				type="password"
 				name="confirmPassword"
-				class="rounded-b-lg border-x border-b border-primary bg-background p-2 placeholder:text-background-200"
+				class="rounded-b-lg border-x border-b border-primary bg-background p-2 transition-colors placeholder:text-background-200"
 			/>
 
 			{#if passwordError}
