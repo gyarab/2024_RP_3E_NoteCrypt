@@ -17,7 +17,7 @@ Tento projekt využívá následující technologie:
 ## Funkcionality
 
 - Šifrované ukládání poznámek.
-- Uspořádání poznámek pomocí štítků.
+- Možnost některé poznámky připnout.
 - Rychlé vyhledávání a filtrování poznámek.
 - Responzivní design.
 
