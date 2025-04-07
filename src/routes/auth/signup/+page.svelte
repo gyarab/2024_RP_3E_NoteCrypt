@@ -64,7 +64,9 @@
 
 <Navbar menuButton={false} />
 
-<div class="fixed bottom-0 left-0 right-0 top-0 flex h-screen w-screen items-center justify-center p-4">
+<div
+	class="fixed bottom-0 left-0 right-0 top-0 flex h-screen w-screen items-center justify-center p-4"
+>
 	<form
 		class="flex w-full flex-col items-center rounded-lg bg-background-50 p-4 py-8 md:w-1/3"
 		method="post"
@@ -87,7 +89,7 @@
 				required
 				type="email"
 				name="email"
-				class="rounded-lg border border-primary bg-background p-2"
+				class="rounded-lg border border-primary bg-background p-2 transition-colors"
 			/>
 
 			{#if emailError}
@@ -99,7 +101,7 @@
 				required
 				type="password"
 				name="password"
-				class=" rounded-t-lg border border-b border-primary border-b-primary bg-background p-2"
+				class=" rounded-t-lg border border-b border-primary border-b-primary bg-background p-2 transition-colors"
 			/>
 			<input
 				required
