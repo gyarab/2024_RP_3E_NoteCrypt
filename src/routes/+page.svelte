@@ -1,13 +1,19 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import Button from '$lib/components/button.svelte';
+	import { onMount } from 'svelte';
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
+
+  onMount(() => {
+    document.body.classList.add('dark');
+  });
+
 </script>
 
 <div
-	class="fixed flex h-screen w-screen flex-col items-center justify-center gap-8 bg-gradient-to-tr from-background to-background-100 p-4 md:flex-row md:gap-16"
+	class="fixed bottom-0 left-0 right-0 top-0 flex flex-col items-center justify-center gap-8 bg-gradient-to-tr from-background to-background-100 p-4 md:flex-row md:gap-16"
 >
 	<div class="order-2 md:order-1">
 		<h1 class="mb-1 text-center text-5xl font-bold text-text-800 md:text-start md:text-6xl">

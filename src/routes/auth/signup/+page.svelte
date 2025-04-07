@@ -2,6 +2,7 @@
 	import { enhance } from '$app/forms';
 	import { goto } from '$app/navigation';
 	import Button from '$lib/components/button.svelte';
+	import Navbar from '$lib/components/navbar.svelte';
 
 	let passwordError = $state(false);
 	let emailError = $state(false);
@@ -61,7 +62,9 @@
 	}
 </script>
 
-<div class="flex h-screen w-screen items-center justify-center p-4">
+<Navbar menuButton={false} />
+
+<div class="fixed bottom-0 left-0 right-0 top-0 flex h-screen w-screen items-center justify-center p-4">
 	<form
 		class="flex w-full flex-col items-center rounded-lg bg-background-50 p-4 py-8 md:w-1/3"
 		method="post"
