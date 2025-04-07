@@ -27,7 +27,6 @@
 	let encryptedInput: HTMLInputElement;
 	let noteIdInput: HTMLInputElement;
 
-	// Crypto
 	async function deriveKey(pin: string): Promise<CryptoKey> {
 		const enc = new TextEncoder();
 		const salt = Uint8Array.from(atob(data.user!.salt), (c) => c.charCodeAt(0));

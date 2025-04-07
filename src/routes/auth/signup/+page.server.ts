@@ -40,7 +40,7 @@ export const actions: Actions = {
         return fail(400, { path: error.path, msg: error.errors[0] });
       }
 
-      return fail(400, { msg: error });
+      return fail(400, { msg: 'validationError' });
     }
 
     const userId = generateIdFromEntropySize(10);
