@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import type { PageData } from '../../routes/$types';
 	import Button from './button.svelte';
 
@@ -12,6 +13,8 @@
 			document.body.style.overflow = 'auto';
 		}
 	});
+
+	let signOutMenu = $state(false);
 </script>
 
 <svelte:window bind:innerWidth />
@@ -30,27 +33,14 @@
 		<span class="material-symbols-outlined">close</span>
 	</Button>
 
-	<!-- <Button preset="borderless" colorScheme="text800"> -->
-	<!-- 	<span class="material-symbols-outlined">history</span> -->
-	<!-- 	<span>Recent</span> -->
-	<!-- </Button> -->
-	<!-- <hr class="my-1 w-1/4 border-t-2 border-background-200" /> -->
-	<!-- <Button preset="borderless" colorScheme="text800"> -->
-	<!-- 	<span class="material-symbols-outlined">bookmark</span> -->
-	<!-- 	<span>Bookmarked</span> -->
-	<!-- </Button> -->
-	<!-- <hr class="my-1 w-1/4 border-t-2 border-background-200" /> -->
-	<!-- <Button preset="borderless" colorScheme="text800"> -->
-	<!-- 	<span class="material-symbols-outlined">keep</span> -->
-	<!-- 	<span>Pinned</span> -->
-	<!-- </Button> -->
-	<!-- <div class="grow"></div> -->
-
 	<Button
 		preset="borderless"
 		colorScheme="text800"
 		disableDefaults={true}
 		additionalStyle="flex transition-colors flex-col items-center rounded-lg p-2"
+		click={() => {
+			signOutMenu = !signOutMenu;
+		}}
 	>
 		<span style="font-size:4rem" class="material-symbols-outlined fill -mb-2">person</span>
 		<h2 class="max-w-full truncate font-bold">
@@ -60,6 +50,15 @@
 			{pageData?.user?.email ? pageData.user.email : 'email@example.com'}
 		</h3>
 	</Button>
+
+	{#if signOutMenu}
+		<form method="POST" action="/">
+			<Button preset="fill" colorScheme="accent" additionalStyle="mt-2">
+				<span class="material-symbols-outlined">logout</span>
+				<h2 class="max-w-full truncate font-bold">Sign Out</h2>
+			</Button>
+		</form>
+	{/if}
 
 	<div class="grow"></div>
 	<Button preset="borderless" additionalStyle="mb-8" colorScheme="text800">

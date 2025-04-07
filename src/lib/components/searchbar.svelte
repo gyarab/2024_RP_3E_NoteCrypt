@@ -29,7 +29,7 @@
 		bind:value={search}
 	/>
 	<div
-		class="flex h-full items-center justify-center rounded-r-full bg-background-100 pr-4 text-text-200"
+		class="flex h-full items-center justify-center rounded-r-full bg-background-100 pr-4 text-text-200 transition-colors"
 	>
 		<span class="material-symbols-outlined">search</span>
 	</div>

@@ -1,15 +1,17 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import type { PageData } from '../../routes/$types';
 	import Button from './button.svelte';
 	import Sidebar from './sidebar.svelte';
-	let darkMode = $state(false);
 	let menuOpen = $state(false);
 
 	let { title = 'NoteCrypt', pageData }: { title?: string; pageData?: PageData } = $props();
 
 	function switchTheme() {
-		darkMode = !darkMode;
 		document.body.classList.toggle('dark');
+		const darkMode = document.body.classList.contains('dark');
+
+		document.cookie = `theme=${darkMode ? 'dark' : 'light'}; path=/; max-age=31536000`;
 	}
 
 	function toggleMenu() {
@@ -32,4 +34,4 @@
 </nav>
 <div class="h-16 w-full"></div>
 
-<Sidebar bind:open={menuOpen} pageData={pageData} />
+<Sidebar bind:open={menuOpen} {pageData} />
