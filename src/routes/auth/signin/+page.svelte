@@ -45,19 +45,19 @@
 					goto('/home');
 					break;
 				case 'userNotFound':
-					toggleError('email', 'No user with this email exists!');
+					toggleError('email', 'no user with this email exists');
 					break;
 				case 'incorrectPassword':
-					toggleError('password', 'Incorrect password!');
+					toggleError('password', 'incorrect password');
 					break;
 				default:
 					console.log(r);
-					toggleError('unknown', 'Unknown error');
+					toggleError('unknown', 'unknown error');
 					break;
 			}
 		} else {
 			console.log(r);
-			toggleError('unknown', 'Unknown error');
+			toggleError('unknown', 'unknown error');
 		}
 	}
 </script>
