@@ -19,11 +19,11 @@
 		{note.title}
 	</h3>
 	{#if note.encrypted}
-		<div class="flex grow items-center justify-center">
+		<div class="flex grow w-full items-center justify-center">
 			<h1 class="material-symbols-outlined text-4xl text-accent">lock</h1>
 		</div>
 	{:else}
-		<div class="flex grow items-center justify-center">
+		<div class="flex grow w-full items-center justify-center">
 			<h1 class="material-symbols-outlined text-4xl text-text-800">lock_open</h1>
 		</div>
 	{/if}

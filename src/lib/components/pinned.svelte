@@ -34,11 +34,11 @@
 	<h3 class="max-w-full truncate font-semibold text-accent">{note.title}</h3>
 	<hr class="w-full border-t-2 border-accent-200" />
 	{#if !note.encrypted}
-		<p class="line-clamp-4 max-h-full grow text-ellipsis text-start text-xs text-accent-800">
+		<p class="line-clamp-4 max-h-full w-full grow text-ellipsis text-start text-xs text-accent-800">
 			{content}
 		</p>
 	{:else}
-		<div class="flex grow items-center justify-center">
+		<div class="flex w-full grow items-center justify-center">
 			<h1 class="material-symbols-outlined text-5xl text-accent">lock</h1>
 		</div>
 	{/if}
